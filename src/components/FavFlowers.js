@@ -46,7 +46,7 @@ class FavFlowers extends React.Component {
   }
 
   updateFavFlower = ((e) => {
-    e.preventDefault();
+//     e.preventDefault();
     const flowerId = this.state.updateFlowerObj._id;
     const body = {
       name: e.target.name.value,
