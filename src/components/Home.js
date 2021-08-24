@@ -16,7 +16,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const url = `http://localhost:8001/flowers`
+    const url = `${process.env.REACT_APP_SERVER}/flowers`
     axios.get(url)
       .then(response => {
         console.log(response.data);
@@ -34,7 +34,7 @@ class Home extends React.Component {
       email: this.props.auth0.user.email
     }
     console.log(addFlower);
-    const url = `http://localhost:8001/add`;
+    const url = `${process.env.REACT_APP_SERVER}/add`;
     axios.post(url, addFlower).then(res => {
     }).catch();
   }
@@ -42,11 +42,10 @@ class Home extends React.Component {
 
   render() {
     return (
-
-      this.state.flowers.map((flower, idx) => {
-        return (
-          <>
-            <Row key={idx} xs={2} md={3} className="g-3">
+      <Row xs={2} md={3} className="g-3">{
+        this.state.flowers.map((flower, idx) => {
+          return (
+            <>
               <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={flower.photo} />
                 <Card.Body>
@@ -57,11 +56,11 @@ class Home extends React.Component {
                   <Button onClick={() => this.addFavFlower(idx)} variant="primary">Add to favorite</Button>
                 </Card.Body>
               </Card>
-            </Row>
-          </>
-        )
-      })
-
+            </>
+          )
+        })
+      }
+      </Row>
     )
   }
 }
